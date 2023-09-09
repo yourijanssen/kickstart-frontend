@@ -16,7 +16,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
    * The declarations array lists the components that belong to this module.
    * These components are available for use within the AppModule.
    */
-  declarations: [AppComponent, HeroesComponent, HeroDetailComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    HeroesComponent,
+    HeroDetailComponent,
+    DashboardComponent,
+  ],
   /**
    * The imports array specifies the modules that this module depends on.
    * BrowserModule is required for running the application in a web browser.

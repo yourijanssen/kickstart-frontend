@@ -1,5 +1,4 @@
-# EditorConfig is a platform-independent configuration file 
-# that aims to define and maintain consistent coding styles across different editors and IDEs.
+# Editor configuration, see https://editorconfig.org
 root = true
 
 [*]
