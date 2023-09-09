@@ -1,0 +1,9 @@
+<!-- @author Youri Janssen -->
+<h2>Top Heroes</h2>
+<div class="heroes-menu">
+  <!-- Structural directive called *ngFor is used. It iterates over the collection of heroes 
+    and generate HTML elements for each hero in the collection. -->
+  <a *ngFor="let hero of heroes" routerLink="/detail/{{ hero.id }}">
+    {{ hero.name }}
+  </a>
+</div>
