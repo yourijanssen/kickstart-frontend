@@ -1,9 +1,37 @@
 <!-- @author Youri Janssen -->
 <h2>My Heroes</h2>
 <ul class="heroes">
+  <!-- Display a list of heroes -->
   <li *ngFor="let hero of heroes">
+    <a routerLink="/detail/{{ hero.id }}">
+      <span class="badge">{{ hero.id }}</span> {{ hero.name }}
+    </a>
+    <button (click)="deleteHero(hero.id)" class="delete-button">Delete</button>
+  </li>
+</ul>
+
+<div>
+  <!-- Search input and button -->
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Enter hero name" />
+  <button (click)="searchHeroByName(searchTerm)">Search</button>
+</div>
+
+<h3>Search Results by Name</h3>
+<ul class="heroes">
+  <!-- Display search results by name -->
+  <li *ngFor="let hero of searchedHeroesByName">
     <a routerLink="/detail/{{ hero.id }}">
       <span class="badge">{{ hero.id }}</span> {{ hero.name }}
     </a>
   </li>
 </ul>
+
+<!-- Add a New Hero Section -->
+<h2>Add a New Hero</h2>
+<div>
+  <form #heroForm="ngForm" (ngSubmit)="createHero(heroForm)">
+    <label for="newHeroName">Hero Name:</label>
+    <input type="text" id="newHeroName" name="newHeroName" [(ngModel)]="newHeroName" required />
+    <button type="submit" [disabled]="!heroForm.form.valid">Add</button>
+  </form>
+</div>

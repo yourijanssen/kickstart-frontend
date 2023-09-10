@@ -16,6 +16,7 @@ import { HeroService } from 'src/app/services/hero.service';
 export class HeroDetailComponent implements OnInit {
   /** The hero to be displayed. Undefined if hero id does not exist */
   public hero: Hero | undefined;
+  public newHeroName = ''; // Add this variable
 
   /**
    * Creates an instance of HeroDetailComponent.
@@ -43,5 +44,20 @@ export class HeroDetailComponent implements OnInit {
   /** Navigates back to the previous page. */
   public goBack(): void {
     this.location.back();
+  }
+
+  /**
+   * Updates the hero's name.
+   * Checks if the hero object exists and if the new name is not empty.
+   */
+  public updateHeroName(): void {
+    if (this.hero && this.newHeroName.trim()) {
+      this.heroService.updateHeroNameById(this.hero.id, this.newHeroName).subscribe(() => {
+        // Update the hero's name locally
+        if (this.hero) {
+          this.hero.name = this.newHeroName;
+        }
+      });
+    }
   }
 }

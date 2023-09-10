@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Hero } from 'src/app/interfaces/hero';
 import { HeroService } from 'src/app/services/hero.service';
 
 /**
- * @author Youri Janssen //entire file
  * Component for displaying a list of heroes.
+ * @class HeroesComponent
  */
 @Component({
   selector: 'app-heroes',
@@ -12,12 +13,14 @@ import { HeroService } from 'src/app/services/hero.service';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit {
-  /** An array containing the list of heroes to be displayed. */
-  public heroes: Hero[] = []; // "public" access modifier
+  public heroes: Hero[] = [];
+  public searchedHeroesByName: Hero[] = [];
+  public searchTerm = '';
+  public newHeroName = '';
 
   /**
    * Creates an instance of HeroesComponent.
-   * @param heroService - The hero service for retrieving hero data.
+   * @param {HeroService} heroService - The hero service for retrieving hero data.
    */
   constructor(private heroService: HeroService) {}
 
@@ -29,8 +32,54 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();
   }
 
-  /** Retrieves the list of heroes to be displayed. */
+  /**
+   * Retrieves the list of heroes to be displayed.
+   */
   private getHeroes(): void {
     this.heroService.getHeroes().subscribe(heroes => (this.heroes = heroes));
+  }
+
+  /**
+   * Deletes a hero by their ID.
+   * @param {number} id - The ID of the hero to delete.
+   */
+  deleteHero(id: number): void {
+    if (confirm('Are you sure you want to delete this hero?')) {
+      this.heroService.deleteHero(id).subscribe(() => {
+        // Filter out the deleted hero from the heroes list
+        this.heroes = this.heroes.filter(hero => hero.id !== id);
+      });
+    }
+  }
+
+  /**
+   * Searches for heroes by name and displays the results.
+   * @param {string} name - The name to search for.
+   */
+  searchHeroByName(name: string): void {
+    this.heroService.getHeroesByName(name).subscribe(heroes => {
+      this.searchedHeroesByName = heroes; // Assign the found heroes to the array
+    });
+  }
+
+  /**
+   * Creates a new hero with the given name.
+   * @param {NgForm} form - The form containing the new hero's name.
+   */
+  createHero(form: NgForm): void {
+    // Extract the new hero name from the form
+    const newHeroName = form.value.newHeroName;
+    if (newHeroName) {
+      this.heroService.createHero(newHeroName).subscribe(heroId => {
+        if (heroId) {
+          // Hero creation was successful, add the new hero to the list
+          const newHero: Hero = { id: heroId, name: newHeroName };
+          this.heroes.push(newHero);
+          // Clear the form input
+          form.resetForm();
+          window.location.reload();
+        }
+      });
+    }
   }
 }

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeroesComponent } from './pages/heroes/heroes.component';
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 /**
  * @author Youri Janssen //entire file
@@ -23,7 +24,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
    * AppRoutingModule provides the application's routing configuration.
    * FormsModule is necessary for working with forms in the application and enabling its functionalities.
    */
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   /** Providers array is where you would include service providers if needed. */
   providers: [],
   /**

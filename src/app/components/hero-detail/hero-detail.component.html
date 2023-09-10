@@ -4,8 +4,9 @@
   <div><span>id: </span>{{ hero.id }}</div>
   <div>
     <label for="hero-name">Hero name: </label>
-    <!-- Two way data binding, using the ngModel directive. -->
-    <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name" />
+    <!-- Two-way data binding with ngModel -->
+    <input id="hero-name" [(ngModel)]="newHeroName" placeholder="Hero name" />
   </div>
-  <button type="button" (click)="goBack()">go back</button>
+  <button type="button" (click)="updateHeroName()">Update Name</button>
+  <button type="button" (click)="goBack()">Go Back</button>
 </div>
