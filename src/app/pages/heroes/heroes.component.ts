@@ -46,7 +46,6 @@ export class HeroesComponent implements OnInit {
   deleteHero(id: number): void {
     if (confirm('Are you sure you want to delete this hero?')) {
       this.heroService.deleteHero(id).subscribe(() => {
-        // Filter out the deleted hero from the heroes list
         this.heroes = this.heroes.filter(hero => hero.id !== id);
       });
     }
@@ -75,9 +74,9 @@ export class HeroesComponent implements OnInit {
           // Hero creation was successful, add the new hero to the list
           const newHero: Hero = { id: heroId, name: newHeroName };
           this.heroes.push(newHero);
+
           // Clear the form input
           form.resetForm();
-          window.location.reload();
         }
       });
     }

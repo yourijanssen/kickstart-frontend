@@ -9,3 +9,4 @@ lint:
   script:
     - npm install --force
     - npm run check
+    - ng test
