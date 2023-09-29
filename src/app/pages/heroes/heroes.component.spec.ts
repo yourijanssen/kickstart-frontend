@@ -1,7 +1,3 @@
-/**
- * @fileoverview HeroesComponent unit tests.
- */
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, NgForm } from '@angular/forms';
 import { of } from 'rxjs';
@@ -14,7 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 /**
  * Describe a test suite for the HeroesComponent.
  */
-describe('HeroesComponent', () => {
+describe('HeroesComponent test suite', () => {
   let component: HeroesComponent;
   let fixture: ComponentFixture<HeroesComponent>;
   let mockHeroService: jasmine.SpyObj<HeroService>;
@@ -40,12 +36,12 @@ describe('HeroesComponent', () => {
     mockHeroService.getHeroes.and.returnValue(of(heroesData));
     mockHeroService.deleteHero.and.returnValue(of(undefined));
     mockHeroService.getHeroesByName.and.returnValue(of([]));
-    mockHeroService.createHero.and.returnValue(of(4)); // Assuming the hero creation returns an ID.
+    mockHeroService.createHero.and.returnValue(of({ id: 5 }));
 
     TestBed.configureTestingModule({
       declarations: [HeroesComponent],
       providers: [{ provide: HeroService, useValue: mockHeroService }],
-      imports: [FormsModule, RouterModule, RouterTestingModule], // Include RouterModule and RouterTestingModule
+      imports: [FormsModule, RouterModule, RouterTestingModule],
     });
 
     fixture = TestBed.createComponent(HeroesComponent);
@@ -106,7 +102,8 @@ describe('HeroesComponent', () => {
       value: {
         newHeroName: newHeroName,
       },
-      resetForm: () => {}, // Correct the type here
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      resetForm: () => {},
     } as NgForm;
 
     component.createHero(createHeroForm);

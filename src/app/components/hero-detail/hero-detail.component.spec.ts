@@ -38,6 +38,7 @@ describe('HeroDetailComponent test suite', () => {
     mockActivatedRoute = { snapshot: { paramMap: { get: () => '1' } } };
 
     // Create a mock Location object.
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     mockLocation = { back: () => {} };
 
     // Configure the TestBed with necessary providers and imports.

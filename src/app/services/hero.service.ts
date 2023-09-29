@@ -66,9 +66,9 @@ export class HeroService {
    * @param name - The name of the new hero.
    * @returns An Observable containing the ID of the newly created hero.
    */
-  public createHero(name: string): Observable<number> {
+  public createHero(name: string): Observable<{ id: number }> {
     const url = `${this.heroesUrl}`;
-    return this.http.post<number>(url, { name });
+    return this.http.post<{ id: number }>(url, { name });
   }
 
   /**

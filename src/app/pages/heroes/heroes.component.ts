@@ -66,16 +66,13 @@ export class HeroesComponent implements OnInit {
    * @param {NgForm} form - The form containing the new hero's name.
    */
   createHero(form: NgForm): void {
-    // Extract the new hero name from the form
     const newHeroName = form.value.newHeroName;
     if (newHeroName) {
-      this.heroService.createHero(newHeroName).subscribe(heroId => {
-        if (heroId) {
-          // Hero creation was successful, add the new hero to the list
-          const newHero: Hero = { id: heroId, name: newHeroName };
+      this.heroService.createHero(newHeroName).subscribe(result => {
+        if (result) {
+          const newHero: Hero = { id: result.id, name: newHeroName };
           this.heroes.push(newHero);
 
-          // Clear the form input
           form.resetForm();
         }
       });
